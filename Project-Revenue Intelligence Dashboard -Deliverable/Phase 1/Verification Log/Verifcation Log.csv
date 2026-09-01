@@ -1,0 +1,7 @@
+﻿S no,Knowledge Base,Question Asked,Expected Answer,Q’s Actual Answer,Match?,Notes
+1,NovaTech CRM Deals,How many records are in the CRM deals dataset?,499 records,499 records,Yes,Confirms CRM dataset completeness and SPICE import accuracy.
+2,NovaTech Marketing Campaigns,How many records are in the marketing campaigns dataset?,"2,240 records","2,240 records",Yes,Matches SPICE preview and confirms full dataset indexing.
+3,NovaTech Support Tickets,How many support tickets are in the dataset?,"3,000 records","3,000 records",Yes,Support dataset indexed correctly even though CSV preview was too large.
+4,NovaTech CRM Deals,How many distinct product categories exist in the CRM dataset?,"2 (NovaPulse, NovaEdge)",2 distinct product categories,Yes,Verified via table visual and dataset preview.
+5,NovaTech Support Tickets,What are the distinct ticket priority levels in the support dataset?,"Critical, High, Medium, Low","Critical, High, Medium, Low",Yes,Confirms clean priority field and correct semantic indexing.
+6,NovaTech Reference Documents,How many customer segments does NovaTech use?,"5 (Enterprise, Growth, Professional, Standard, Starter)",5 customer segments,Yes,Matches company background and marketing brief.

@@ -1,0 +1,74 @@
+
+
+ Phase 3 Dashboard Notes
+Overview*
+The NovaTech Unified Insights Dashboard integrates CRM, Marketing, and Support datasets to provide unified, cross‑functional insights across revenue performance, campaign effectiveness, and support efficiency. By combining three operational datasets into a single analytical view, the dashboard enables leadership to identify trends, compare product performance, and evaluate customer experience metrics in one place.
+
+
+Visuals Included
+
+1. Deal Value by Product Category  
+Shows total revenue contribution by product category.  
+This helps leadership understand which product lines drive the highest deal value and where strategic investment may be most impactful.
+2. Deal Duration Trend
+Displays how long deals take to close over time.  
+Negative durations were corrected using `abs()` to ensure accurate representation.  
+This visual highlights sales cycle efficiency and identifies periods where deal closure slowed or accelerated.
+
+3. Marketing ROI by Campaign 
+Compares ROI across marketing campaigns.  
+This visual identifies which campaigns generated positive returns and which underperformed, supporting better budget allocation and future campaign planning.
+
+4. Support Tickets by Priority
+Shows distribution of support tickets by urgency level.  
+This helps support leadership understand workload pressure, resource needs, and customer pain points.
+
+5. Support Efficiency Score by Product Area
+Displays total support efficiency score across product areas.  
+This highlights which product areas have the fastest and most effective support resolution, and where operational improvements may be needed.
+
+6. Revenue vs Support Efficiency (Scatter Plot) 
+Cross‑dataset insight combining CRM and Support data.  
+Shows whether high‑value customers receive faster support.  
+This visual demonstrates unified dataset functionality and provides leadership with a holistic view of customer value vs. customer experience.
+
+Data Quality Adjustments
+
+Negative Deal Duration Correction
+Some deals had `deal_closed_date` earlier than `deal_created_date` due to data inconsistencies.  
+To ensure accurate visualization, Deal Duration was corrected using:
+
+abs(dateDiff({deal_closed_date}, {deal_created_date}, 'DD'))
+
+Null Value Replacement**
+Null values in categorical fields were replaced using `coalesce()` to improve readability and prevent blank labels:
+
+Examples:
+
+coalesce({product_category}, 'Unknown')
+coalesce({campaign_name}, 'Not Provided')
+
+
+Join Strategy
+Left joins were used to preserve CRM as the anchor dataset and avoid losing records during dataset unification.
+
+Filters Added
+The dashboard includes four sheet‑level filters to enable interactive exploration:
+
+Industry,Sales Region ,Campaign Channel,Priority
+
+These filters allow leadership to slice insights by customer segment, region, marketing channel, and ticket urgency.
+
+Purpose
+The dashboard provides a unified operational view across NovaTech’s CRM, Marketing, and Support functions.  
+It enables leadership to:
+
+- Identify high‑value product categories  
+- Monitor sales cycle efficiency  
+- Evaluate marketing performance  
+- Understand support workload distribution  
+- Compare customer value vs. support experience  
+- Make data‑driven decisions across departments  
+
+This unified dashboard supports strategic planning, operational improvements, and customer‑centric decision‑making.
+
