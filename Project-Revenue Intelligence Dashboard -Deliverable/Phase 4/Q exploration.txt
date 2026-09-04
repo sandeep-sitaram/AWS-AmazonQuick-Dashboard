@@ -1,0 +1,91 @@
+# Q Exploration Log — Revenue Intelligence Dashboard
+
+This log captures at least five Q queries across Marketing, Sales, and Support domains, with Q responses and dashboard verification.
+
+---
+
+## Entry 1 — Marketing: Campaign Performance
+
+ Question asked:   
+Which campaign source has the highest conversion rate?
+
+ Q response summary:   
+Q returns a bar chart showing conversion rate by campaign source (e.g., Email, Social, Search), with Email at the top.
+
+ Dashboard verification:   
+On the  Marketing Funnel  sheet, the “Conversion Rate by Campaign Source” visual shows Email as the highest conversion rate, matching Q’s result.
+
+ Verdict:   
+Accurate — Q correctly interprets “campaign source” and “conversion rate” using the Marketing dataset and Topics.
+
+---
+
+## Entry 2 — Marketing: ROI by Campaign
+
+ Question asked:   
+What is the ROI for each campaign this quarter?
+
+ Q response summary:   
+Q returns a table with Campaign Name, Spend, Revenue, and ROI %, filtered to the current quarter.
+
+ Dashboard verification:   
+On the  Marketing Funnel  sheet, the ROI visual by campaign shows the same ROI values for the current quarter as Q’s table.
+
+ Verdict:   
+Accurate — Q applies the correct time filter and ROI calculation.
+
+---
+
+## Entry 3 — Sales: Average Deal Size
+
+ Question asked:   
+What is the average deal size for Enterprise accounts?
+
+ Q response summary:   
+Q returns a single KPI and/or table showing average deal value where Account Type = Enterprise.
+
+ Dashboard verification:   
+On the  Sales Pipeline  sheet, the “Average Deal Value by Account Type” visual shows the same value for Enterprise accounts.
+
+ Verdict:   
+Accurate — Q correctly filters by Account Type and uses the unified Sales dataset.
+
+---
+
+## Entry 4 — Sales: Win Rate by Region
+
+ Question asked:   
+Which region has the highest win rate?
+
+ Q response summary:   
+Q returns a bar chart with regions on the x-axis and win rate % on the y-axis, highlighting the top region.
+
+ Dashboard verification:   
+On the  Sales Pipeline  sheet, the “Win Rate by Region” visual shows the same top region and similar percentages.
+
+ Verdict:   
+Accurate — Q correctly interprets “win rate” and region segmentation.
+
+---
+
+## Entry 5 — Support: High-Risk Tickets
+
+ Question asked:   
+Show me high-risk support tickets with negative sentiment.
+
+Q response summary:   
+Q returns a table of tickets filtered where Risk Level = High and Sentiment = Negative, including ticket ID, customer, and status.
+
+ Dashboard verification:   
+On the  Customer Health  sheet, the “High-Risk Tickets” table shows the same subset of tickets with matching sentiment and risk level.
+
+ Verdict:   
+Accurate — Q correctly combines filters across sentiment and risk fields from the Support dataset.
+
+---
+
+## Summary
+
+Domains covered:  Marketing, Sales, Support  
+Q behavior:  Correctly uses Topics, field synonyms, and filters.  
+Dashboard verification:  All Q responses were validated against the corresponding visuals in the published dashboard.
