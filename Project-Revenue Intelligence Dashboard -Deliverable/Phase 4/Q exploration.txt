@@ -82,6 +82,19 @@ On the  Customer Health  sheet, the “High-Risk Tickets” table shows the same
  Verdict:   
 Accurate — Q correctly combines filters across sentiment and risk fields from the Support dataset.
 
+
+## Entry 6 - What is the average deal size for accounts with more than 3 support tickets in the last 30 days?
+The dashboard confirmed that accounts with higher support activity could be isolated and compared against deal value metrics from the sales dataset.
+
+Verdict:
+Accurate. Q successfully combined data from multiple domains and applied the ticket-volume filter before calculating average deal value.
+
+Business insight:
+Accounts with high support volume may require additional customer success engagement to reduce service burden and protect revenue opportunities.
+
+Recommended action:
+Create a monitoring segment for accounts generating more than three support tickets in a 30-day period and review their renewal risk and customer satisfaction metrics.
+
 ---
 
 ## Summary
