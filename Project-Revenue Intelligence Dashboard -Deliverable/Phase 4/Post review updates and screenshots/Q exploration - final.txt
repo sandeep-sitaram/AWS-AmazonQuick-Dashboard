@@ -1,0 +1,135 @@
+# Q Exploration Log — Revenue Intelligence Dashboard
+
+This log captures six Q queries across Marketing, Sales, and Support domains, with real Quick Chat responses, dashboard verification, and verdicts. Entries were re-run directly in Quick Chat (screenshots retained) rather than drafted from expected outcomes; where Q's answer disagreed with the dashboard, that disagreement is documented rather than reconciled after the fact.
+
+---
+
+## Entry 1 — Marketing: Campaign Conversion Rate by Channel
+
+**Question asked:**
+Which campaign source has the highest conversion rate?
+
+**Q response summary:**
+Direct Mail has the highest conversion rate at 53.02% (149 leads, 79 responses), significantly outperforming other channels. Full breakdown: Paid Social 40.31%, Partner Referral 34.32%, Organic Search 14.46%, Email 8.68%. Q also noted Direct Mail has the smallest lead volume while Partner Referral generates the most leads (807) at a lower conversion rate.
+
+**Dashboard verification:**
+The Marketing Funnel sheet currently has no visual broken down by Campaign Channel (Direct Mail, Paid Social, Partner Referral, Organic Search, Email) — existing visuals ("Response Rate by Campaign," "Marketing ROI by Campaign") are grouped by Campaign Name instead. Q's answer cannot be directly verified against an existing dashboard visual.
+
+**Verdict:**
+Partially verifiable. Q's calculation is internally consistent and cites its source (novatech_marketing_campaigns.csv), but the dashboard is missing a channel-level view to confirm it against.
+
+**Recommended action:**
+Add a "Conversion Rate by Campaign Channel" bar chart to the Marketing Funnel sheet so this exact question can be answered visually, not just via Quick Chat.
+
+---
+
+## Entry 2 — Marketing: Campaign ROI (Time Filter Limitation)
+
+**Question asked:**
+What is the ROI for each campaign this quarter?
+
+**Q response summary:**
+Q did not return an ROI figure. It correctly identified that no campaign data exists for the current quarter (Q3 2026) and noted the most recent campaign date in the dataset is January 31, 2025. Q offered to pull ROI for the most recent available quarter instead.
+
+**Dashboard verification:**
+Not applicable — no data exists for the literal time frame asked, so there is nothing to verify against the dashboard.
+
+**Verdict:**
+Accurate. Q correctly refused to fabricate a number for a period with no data, rather than guessing. This is the desired behavior, but the question itself needs to specify a real date range (e.g., "this past quarter" or a named quarter) to be answerable.
+
+---
+
+## Entry 3 — Sales: Average Deal Size for Enterprise Accounts
+
+**Question asked:**
+What is the average deal size for Enterprise accounts?
+
+**Q response summary:**
+Q returned $1,589.17 average deal value for Enterprise accounts (201 deals) — the highest average across company size segments. Full breakdown: Small $1,486.49 (39 deals), Medium $1,353.30 (43 deals), Large $1,257.47 (216 deals).
+
+**Dashboard verification:**
+The Sales Pipeline sheet does not currently include a visual broken down by Company Size — existing visuals show Deal Value by Product Category and by Region only. Cannot be directly verified against a dashboard visual.
+
+Separately, this same question returned different values in three separate Quick Chat sessions during this project ($2,745.31, then $1,699.32, then $1,589.17). This is a real and repeatable inconsistency, not one-off noise — it most likely reflects Q sometimes calculating against the deduplicated CRM table (201 real deals) and sometimes against the fanned-out unified joined table (22,698+ rows from the CRM-Marketing-Support join), which inflates or skews the denominator depending on which table scope Q selects.
+
+**Verdict:**
+Not reliably verifiable as-is. The underlying calculation is scope-dependent and needs to be pinned to a single table (ideally the CRM-only deduplicated table) via Topic instructions, or the question needs to explicitly specify "using distinct deals" to get a consistent answer.
+
+**Recommended action:**
+Add a custom instruction to the Topic clarifying that "average deal size" and "deal value" should always aggregate from the deduplicated CRM Deals table (not the unified joined table), to prevent this scope ambiguity from recurring.
+
+---
+
+## Entry 4 — Sales: Win Rate by Region
+
+**Question asked:**
+Which region has the highest win rate?
+
+**Q response summary:**
+Q returned Central at 69.90% win rate (206 deals, 144 won) as highest, followed by West at 58.79% and East at 57.81%.
+
+**Dashboard verification:**
+The Sales Pipeline sheet's "Win Rate by Region" visual does not match this. Its y-axis runs 0–30K with bar values around 26K (Central), 23K (West), and 15K (East) — these are not percentages and cannot represent a win rate. The visual is very likely plotting a raw count or sum field mislabeled as "Win Rate," rather than an actual win-rate calculation (won deals ÷ total deals).
+
+**Verdict:**
+Mismatch — not verifiable as published. Q's answer is directionally plausible (Central leading) but the dashboard visual itself needs to be corrected before it can confirm or contradict Q's number.
+
+**Recommended action:**
+Rebuild the "Win Rate by Region" visual using a calculated field (e.g., countif(deal_outcome = 'Won') / count(*)) formatted as a percentage, then re-verify Q's answer against it.
+
+---
+
+## Entry 5 — Support: High-Risk Tickets with Negative Sentiment
+
+**Question asked:**
+Show me high-risk support tickets with negative sentiment.
+
+**Q response summary:**
+Q returned 129 tickets: 14 critical-priority (Severity Score 4) and 115 high-priority (Severity Score 3), all with negative sentiment. It flagged 1 unresolved ticket (TKT-929816) and listed the most severe critical tickets in a table, plus separate notes on tickets involving data loss, security incidents, and payment impact.
+
+**Dashboard verification:**
+The Customer Health sheet's "High-Risk Tickets" table shows 14 rows — matching only the critical-severity subset, not the full 129. This also does not match the Topic's own custom instruction, which defines "high risk" as severity_score >= 4 (i.e., critical only, 14 tickets). Q's natural-language answer combined severity 3 and 4 tickets under "high-risk," which is broader than both the dashboard's calculated field and the Topic's stated definition.
+
+**Verdict:**
+Mismatch. All three sources — Q's answer, the Topic's custom instruction, and the dashboard's high_risk_flag calculated field — currently disagree on what qualifies as "high risk." Q's interpretation of "high risk" was broader than the configured definition.
+
+**Business insight:**
+This is a real semantic-drift issue: Q's natural-language interpretation of "high-risk" doesn't reliably respect the Topic's explicit threshold once a similarly-worded but broader question is asked. If the revenue team uses Quick Chat to check risk accounts, they may act on 129 accounts when the dashboard's governed process would surface 14.
+
+**Recommended action:**
+Tighten the Topic's custom instruction to explicitly exclude Severity Score 3 (e.g., "'high risk' refers strictly to severity_score = 4; do not include severity_score = 3 / 'high priority' tickets"), then re-test this exact question to confirm Q's answer converges to 14.
+
+---
+
+## Entry 6 — Cross-Domain: Average Deal Size for High-Ticket-Volume Accounts
+
+**Question asked:**
+What is the average deal size for accounts with more than 3 support tickets in the last 30 days?
+
+**Q response summary:**
+Q returned $1,430.34 average deal value for accounts with more than 3 support tickets in the last 30 days, pulled from the unified account-level dataset. Q explicitly noted it deduplicated at the account/opportunity level to avoid inflating the result from repeated deal values across multiple ticket rows in the unified (joined) dataset.
+
+**Dashboard verification:**
+No single dashboard visual directly answers this combined filter (support ticket volume + 30-day window + average deal value), which is expected — this is exactly the kind of ad hoc, cross-dataset question the Quick Chat / Topic layer is meant to answer instead of a static visual. The result is directionally consistent with the "Revenue vs Support Efficiency" scatter visual on Customer Health, which also plots deal_value against support-related metrics from the same unified dataset.
+
+**Verdict:**
+Accurate, and notably Q self-corrected for the same table fan-out issue flagged in Entry 3 — proactively deduplicating rather than returning an inflated average. This suggests the fan-out problem in Entry 3 is inconsistent (sometimes handled, sometimes not) rather than a permanent limitation.
+
+**Business insight:**
+Accounts generating high support volume in a short window represent a real, quantifiable revenue-risk segment; this required combining Sales and Support data, which is precisely the cross-dataset capability Sarah's original brief asked for.
+
+**Recommended action:**
+Create a monitoring segment for accounts generating more than 3 support tickets in a 30-day period, and route them to Customer Success for renewal-risk and satisfaction review before their next contract cycle.
+
+---
+
+## Summary
+
+**Domains covered:** Marketing, Sales, Support, and one cross-domain (Sales + Support) query.
+
+**Q behavior:** Q correctly refuses to fabricate answers when data doesn't exist (Entry 2), and can perform cross-dataset aggregation with explicit deduplication logic when asked directly (Entry 6). However, three real inconsistencies were found rather than smoothed over:
+- Entry 3: the same question returned three different values across sessions, most likely due to inconsistent table-scope selection (deduplicated CRM vs. fanned-out unified dataset).
+- Entry 4: the dashboard's "Win Rate by Region" visual is mislabeled and does not display a percentage, making it unable to confirm Q's answer.
+- Entry 5: Q's definition of "high risk" (129 tickets) is broader than both the dashboard's calculated field and the Topic's own configured instruction (14 tickets each).
+
+**Dashboard verification:** Two of six entries (1, 3) have no matching dashboard visual to verify against; one (4) has a visual that needs to be rebuilt before it can serve as verification; two (2, 6) were verified as accurate or appropriately handled.

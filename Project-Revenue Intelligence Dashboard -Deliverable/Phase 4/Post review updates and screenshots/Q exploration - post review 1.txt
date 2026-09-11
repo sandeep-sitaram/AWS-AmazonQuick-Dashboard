@@ -1,0 +1,393 @@
+Q1 : Which campaign source has the highest conversion rate?
+
+Direct Mail has the highest conversion rate at 53.02%, significantly outperforming all other channels.[1] Here's the full breakdown:
+
+Campaign ChannelTotal LeadsResponsesConversion RateDirect Mail1497953.02%Paid Social32513140.31%Partner Referral80727734.32%Organic Search6719714.46%Email288258.68%
+
+Campaign ChannelTotal LeadsResponsesConversion Rate
+
+Campaign Channel
+
+Total Leads
+
+Responses
+
+Conversion Rate
+
+Direct Mail1497953.02%
+
+Direct Mail
+
+149
+
+79
+
+53.02%
+
+Paid Social32513140.31%
+
+Paid Social
+
+325
+
+131
+
+40.31%
+
+Partner Referral80727734.32%
+
+Partner Referral
+
+807
+
+277
+
+34.32%
+
+Organic Search6719714.46%
+
+Organic Search
+
+671
+
+97
+
+14.46%
+
+Email288258.68%
+
+Email
+
+288
+
+25
+
+8.68%
+
+Key takeaways:
+
+- Direct Mail leads with a 53% conversion rate, though it has the smallest lead volume (149 leads)
+
+- Paid Social is the second-best converter at ~40%
+
+- Partner Referral generates the most leads (807) but converts at ~34%
+
+- Email has the lowest conversion rate at just ~9%
+
+Sources:
+
+[1] novatech_marketing_campaigns.csv
+Dataset
+
+
+q2 : What is the ROI for each campaign this quarter?
+There's no campaign data available for the current quarter (Q3 2026). The most recent campaign date in the dataset is January 31, 2025.[1]
+
+Would you like me to pull the ROI for each campaign from the most recent quarter available in the data instead?
+
+Sources:
+
+[1] novatech_marketing_campaigns.csv
+Dataset
+
+Q3 What is the average deal size for Enterprise accounts?
+
+The average deal size for Enterprise accounts is $1,589.17, based on 201 deals. This is the highest average across all company size segments :[1]
+
+Company SizeAvg Deal Value (USD)Deal CountEnterprise$1,589.17201Small$1,486.4939Medium$1,353.3043Large$1,257.47216
+
+Company SizeAvg Deal Value (USD)Deal Count
+
+Company Size
+
+Avg Deal Value (USD)
+
+Deal Count
+
+Enterprise$1,589.17201
+
+Enterprise
+
+$1,589.17
+
+201
+
+Small$1,486.4939
+
+Small
+
+$1,486.49
+
+39
+
+Medium$1,353.3043
+
+Medium
+
+$1,353.30
+
+43
+
+Large$1,257.47216
+
+Large
+
+$1,257.47
+
+216
+
+Enterprise accounts not only have the highest average deal value but also represent a significant portion of total deals (201 out of 499).
+
+Sources:
+
+[1] novatech_crm_deals.csv
+Dataset
+
+Q4 Which region has the highest win rate?
+The Central region has the highest win rate at 69.90%, leading by a significant margin :[1]
+
+Sales RegionTotal DealsWon DealsWin RateCentral20614469.90%West1659758.79%East1287457.81%
+
+Sales RegionTotal DealsWon DealsWin Rate
+
+Sales Region
+
+Total Deals
+
+Won Deals
+
+Win Rate
+
+Central20614469.90%
+
+Central
+
+206
+
+144
+
+69.90%
+
+West1659758.79%
+
+West
+
+165
+
+97
+
+58.79%
+
+East1287457.81%
+
+East
+
+128
+
+74
+
+57.81%
+
+Key highlights:
+
+- Central outperforms the other regions by ~11 percentage points and also has the highest deal volume (206 deals)
+
+- West and East are closely matched at ~58-59% win rates
+
+- East has the fewest total deals (128) but maintains a competitive win rate
+
+Sources:
+
+[1] novatech_crm_deals.csv
+Dataset
+
+Q5 Show me high-risk support tickets with negative sentiment.
+There are 129 high-risk support tickets with negative customer sentiment (filtered to critical and high priority). Here's a summary of the findings :[1]
+
+Key Stats
+
+- 14 critical-priority tickets (Severity Score 4) and 115 high-priority tickets (Severity Score 3)
+
+- 1 unresolved ticket: TKT-929816 (PineRidge Global, Authentication, EMEA)
+
+Most Severe Tickets (Critical Priority)
+
+Ticket IDCompanyProduct AreaRegionDowntime (min)Error Rate %Severity ScoreResolvedTKT-872416SapphireCode SoftwareData PipelineEMEA77718.644✅TKT-837627TrueNorth ElectronicsAuthenticationEMEA77719.474✅TKT-732929EliteWave MediaNotificationsEMEA68745.654✅TKT-304412(unknown)NotificationsAMER38029.754✅TKT-827514UltraLink CommunicationsBillingAMER28122.174✅TKT-146930NetPulse TechnologiesMobile AppEMEA083.394✅TKT-928317PineRidge GlobalData PipelineEMEA8651.484✅
+
+Ticket IDCompanyProduct AreaRegionDowntime (min)Error Rate %Severity ScoreResolved
+
+Ticket ID
+
+Company
+
+Product Area
+
+Region
+
+Downtime (min)
+
+Error Rate %
+
+Severity Score
+
+Resolved
+
+TKT-872416SapphireCode SoftwareData PipelineEMEA77718.644✅
+
+TKT-872416
+
+SapphireCode Software
+
+Data Pipeline
+
+EMEA
+
+777
+
+18.64
+
+4
+
+✅
+
+TKT-837627TrueNorth ElectronicsAuthenticationEMEA77719.474✅
+
+TKT-837627
+
+TrueNorth Electronics
+
+Authentication
+
+EMEA
+
+777
+
+19.47
+
+4
+
+✅
+
+TKT-732929EliteWave MediaNotificationsEMEA68745.654✅
+
+TKT-732929
+
+EliteWave Media
+
+Notifications
+
+EMEA
+
+687
+
+45.65
+
+4
+
+✅
+
+TKT-304412(unknown)NotificationsAMER38029.754✅
+
+TKT-304412
+
+(unknown)
+
+Notifications
+
+AMER
+
+380
+
+29.75
+
+4
+
+✅
+
+TKT-827514UltraLink CommunicationsBillingAMER28122.174✅
+
+TKT-827514
+
+UltraLink Communications
+
+Billing
+
+AMER
+
+281
+
+22.17
+
+4
+
+✅
+
+TKT-146930NetPulse TechnologiesMobile AppEMEA083.394✅
+
+TKT-146930
+
+NetPulse Technologies
+
+Mobile App
+
+EMEA
+
+0
+
+83.39
+
+4
+
+✅
+
+TKT-928317PineRidge GlobalData PipelineEMEA8651.484✅
+
+TKT-928317
+
+PineRidge Global
+
+Data Pipeline
+
+EMEA
+
+86
+
+51.48
+
+4
+
+✅
+
+Notable Risk Flags
+
+- Data loss: TKT-942453 (IndigoVault Finance)
+
+- Security incidents: TKT-836316 (HavenCrest), TKT-479076 (EliteWave)
+
+- Payment impact: TKT-346106, TKT-576287, TKT-257690, TKT-320653
+
+Patterns
+
+- EMEA and AMER are the most affected regions
+
+- Authentication and Data Pipeline are the most impacted product areas
+
+- Most tickets have been resolved, but the unresolved ticket (TKT-929816) should be prioritized
+
+Sources:
+
+[1] NovaTech Unified Account-Level Dataset
+Dataset
+
+Q6 What is the average deal size for accounts with more than 3 support tickets in the last 30 days?
+The average deal value for accounts with more than 3 support tickets in the last 30 days is $1,430.34[1].
+
+This was calculated by deduplicating at the account/opportunity level to avoid inflating the result from repeated deal values across multiple ticket rows in the unified dataset.
+
+Sources:
+
+[1] NovaTech Unified Account-Level Dataset
+Dataset
+
+
+

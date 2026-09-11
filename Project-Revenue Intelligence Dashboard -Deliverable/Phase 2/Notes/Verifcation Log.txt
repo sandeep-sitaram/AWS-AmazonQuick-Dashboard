@@ -1,0 +1,108 @@
+Verification Log
+
+## **Entry 1 — CRM Dataset Record Count & Schema Validation**  
+**Knowledge Base:** CRM Deals  
+Validated that the CRM dataset contains the expected number of deal records and includes all required fields for Sales Pipeline and cross‑dataset linking.  
+- Confirmed presence of: `deal_id`, `account_id`, `deal_stage`, `deal_value`, `segment`, `product`, `sales_region`, `sales_manager`, `deal_created_date`, `deal_closed_date`.  
+- Verified record count matches source system.  
+- Data types corrected: `deal_value` → number, `deal_created_date` → date, `deal_closed_date` → date.  
+**Result:** CRM dataset is complete and structurally sound.
+
+---
+
+## **Entry 2 — Marketing Dataset Record Count & Field Validation**  
+**Knowledge Base:** Marketing Campaigns  
+Validated that the Marketing dataset contains all fields required for the Marketing Funnel view.  
+- Confirmed presence of: `campaign_name`, `channel`, `customer_segment`, `responses`, `contacts`, `campaign_spend`, `attributed_revenue`.  
+- Verified record count matches source system.  
+- Data types corrected: `campaign_spend` → number, `attributed_revenue` → number.  
+**Result:** Marketing dataset supports campaign performance, ROI, and response rate calculations.
+
+---
+
+## **Entry 3 — Support Dataset Record Count & Field Validation**  
+**Knowledge Base:** Support Tickets  
+Validated that the Support dataset contains all fields required for Customer Health view.  
+- Confirmed presence of: `ticket_id`, `account_id`, `priority`, `product_area`, `sentiment`, `resolution_time`, `region`, `customer_tier`.  
+- Verified record count matches source system.  
+- Data types corrected: `resolution_time` → number.  
+**Result:** Support dataset supports ticket volume, resolution time, sentiment, and risk scoring.
+
+---
+
+## **Entry 4 — Cross‑Dataset Join Readiness (Account‑Level Linking)**  
+**Knowledge Bases:** CRM, Marketing, Support  
+Validated that `account_id` exists in all three datasets and is consistently typed.  
+- Confirmed `account_id` is unique in CRM and repeatable in Marketing/Support.  
+- Verified join cardinality: CRM (1) → Marketing (many), CRM (1) → Support (many).  
+- Ensured no null `account_id` values in CRM (anchor dataset).  
+**Result:** Datasets are ready for unified join and cross‑view filtering.
+
+---
+
+## **Entry 5 — Calculated Fields Validation (Sales & Marketing)**  
+**Knowledge Bases:** CRM, Marketing  
+Validated calculated fields required for Sales Pipeline and Marketing Funnel views.  
+- `days_to_close` = `abs(dateDiff(deal_created_date, deal_closed_date, 'DD'))`  
+- `avg_days_to_close` (aggregate)  
+- `response_rate` = `sum(responses)/sum(contacts)`  
+- `roi` = `sum(attributed_revenue)/sum(campaign_spend)`  
+- Verified formulas produce correct values for sample accounts and campaigns.  
+**Result:** Calculated fields support funnel, conversion, ROI, and pipeline visuals.
+
+---
+
+## **Entry 6 — Calculated Fields Validation (Support & Risk Indicators)**  
+**Knowledge Bases:** Support, CRM  
+Validated calculated fields required for Customer Health and cross‑dataset risk scoring.  
+- `ticket_count` = `countDistinct(ticket_id)`  
+- `high_risk_flag` = `ifelse(deal_value > X AND ticket_count > Y AND sentiment = 'Negative', 'High', 'Normal')`  
+- Verified values for sample accounts with high deal value and high ticket volume.  
+**Result:** Dataset supports risk identification and account‑level drill‑downs.
+
+---
+
+## **Entry 7 — Retrofit Validation for Missing Requirements (Marketing Funnel)**  
+**Knowledge Base:** Marketing  
+Validated presence of fields required for new Marketing Funnel visuals:  
+- Campaign performance by channel  
+- Lead → MQL → Opportunity → Closed Won mapping  
+- Response rate  
+- ROI  
+- Customer segment filtering  
+**Result:** Marketing dataset fully supports retrofitted Marketing Funnel sheet.
+
+---
+
+## **Entry 8 — Retrofit Validation for Missing Requirements (Sales Pipeline)**  
+**Knowledge Base:** CRM  
+Validated presence of fields required for new Sales Pipeline visuals:  
+- Deal stages & outcomes  
+- Win rates (region, rep, product)  
+- Revenue by segment & product  
+- Days to close  
+- Average deal value  
+**Result:** CRM dataset fully supports retrofitted Sales Pipeline sheet.
+
+---
+
+## **Entry 9 — Retrofit Validation for Missing Requirements (Customer Health)**  
+**Knowledge Base:** Support  
+Validated presence of fields required for new Customer Health visuals:  
+- Ticket volume by account  
+- Resolution time by priority  
+- Product area issues  
+- Customer sentiment  
+- Customer tier & region filters  
+**Result:** Support dataset fully supports retrofitted Customer Health sheet.
+
+---
+
+## **Entry 10 — Final Unified Dataset Integrity Check**  
+**Knowledge Bases:** CRM, Marketing, Support  
+Performed final validation of unified dataset after retrofitting:  
+- Joins produce expected row counts.  
+- No unexpected nulls introduced.  
+- Cross‑sheet filters (`account_id`, `segment`, `region`) propagate correctly.  
+- Drill‑downs return correct underlying records.  
+**Result:** Unified dataset is ready for dashboard build and Q/Topic configuration.
